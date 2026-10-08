@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import bgPattern from '../assets/img/bg-pattern.jpg';
 
 import { Reveal } from './Reveal';
+import { basename } from '../Utils/basename';
 
 const AnotherImage: React.FC = () => {
     const bgRef = useRef<HTMLDivElement | null>(null);
@@ -39,7 +40,7 @@ const AnotherImage: React.FC = () => {
         >   
             <div className="md:container max-w-[87rem]">
                 <Reveal direction="top">
-                    <img src={`/content/display/ff7768b9f5ec306a87c8bd6020c3cba0.jpg`} />
+                    <img src={`${basename}/content/display/ff7768b9f5ec306a87c8bd6020c3cba0.jpg`} />
                 </Reveal>
             </div>
         </section>

@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import bgPattern from '../assets/img/bg-pattern.jpg';
 
 import HoverImage from './HoverImage';
+import { useLanguage } from '../Hooks/useLanguage';
 
 type HighLightProps = {
     images: ImageHighlight[];
@@ -14,6 +15,7 @@ type HighLightProps = {
 };
 
 const Highlights: React.FC<HighLightProps> = ({ images, withBackground }) => {
+    const lang = useLanguage();
     const bgRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {  
@@ -47,7 +49,7 @@ const Highlights: React.FC<HighLightProps> = ({ images, withBackground }) => {
             <div>
                 <div className="grid sm:grid-cols-2 gap-4">
                     {images.map((image, index) => (
-                        <HoverImage key={index} src={image.img} alt={`Destaque ${index + 1}`} />
+                        <HoverImage key={index} src={image.img} alt={`${lang('gallery.highlight')} ${index + 1}`} />
                     ))}
                 </div>
             </div>

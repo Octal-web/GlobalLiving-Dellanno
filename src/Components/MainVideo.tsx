@@ -1,9 +1,11 @@
+import { basename } from "../Utils/basename";
+
 const MainVideo: React.FC = () => {
     return (
         <section className="relative w-full h-auto overflow-hidden">
             <video
                 className="hidden md:block w-full h-auto object-cover"
-                src="/content/videos/video-desktop.mp4"
+                src={`${basename}/content/videos/video-desktop.mp4`}
                 autoPlay
                 muted
                 loop
@@ -12,7 +14,7 @@ const MainVideo: React.FC = () => {
 
             <video
                 className="block md:hidden w-full h-auto object-cover"
-                src="/content/videos/video-mobile.mp4"
+                src={`${basename}/content/videos/video-mobile.mp4`}
                 autoPlay
                 muted
                 loop

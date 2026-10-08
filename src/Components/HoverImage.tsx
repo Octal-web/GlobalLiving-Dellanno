@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { basename } from '../Utils/basename';
 
 const HoverImage: React.FC<{ src: string; alt?: string }> = ({ src, alt = '' }) => {
     const imageRef = useRef<HTMLImageElement>(null);
@@ -39,7 +40,7 @@ const HoverImage: React.FC<{ src: string; alt?: string }> = ({ src, alt = '' }) 
         >
             <img
                 ref={imageRef}
-                src={`/content/highlights/${src}`}
+                src={`${basename}/content/highlights/${src}`}
                 alt={alt}
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none w-[112%] max-w-[112%] h-[112%] object-cover"
                 draggable={false}
