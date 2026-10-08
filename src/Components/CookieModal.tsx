@@ -1,3 +1,4 @@
+import { useLanguage } from '../Hooks/useLanguage';
 import React, { useState, useEffect } from 'react';
 
 type CookieModalProps = {
@@ -20,6 +21,7 @@ const getCookie = (name: string): string => {
 };
 
 export const CookieModal: React.FC<CookieModalProps> = ({ acceptCookies, visible }) => {
+    const lang = useLanguage();
     const [showModal, setShowModal] = useState<boolean>(true);
     const [isFadingOut, setIsFadingOut] = useState<boolean>(false);
 
@@ -47,11 +49,9 @@ export const CookieModal: React.FC<CookieModalProps> = ({ acceptCookies, visible
                         <div className="bg-white px-8 py-6 shadow-md mb-10">
                             <div>
                                 <p>
-                                    Utilizamos cookies para oferecer uma melhor experiência, melhorar o desempenho,
-                                    analisar como você interage em nosso site e personalizar conteúdo. Para mais
-                                    informações acesse nossa{' '}
-                                    <a href="https://dellanno.com.br/politica" className="underline" target="_blank" rel="noopener noreferrer">
-                                        política de privacidade
+                                    {lang('cookies.description')}{' '}
+                                    <a href={import.meta.env.VITE_POLITICA_URL} className="underline" target="_blank" rel="noopener noreferrer">
+                                        {lang('cookies.privacyPolicy')}
                                     </a>.
                                 </p>
                             </div>
@@ -59,7 +59,7 @@ export const CookieModal: React.FC<CookieModalProps> = ({ acceptCookies, visible
                                 onClick={handleAcceptCookies}
                                 className="block bg-black text-center text-white h-14 leading-[3rem] font-medium uppercase px-4 ml-auto mt-5 transition-all hover:bg-opacity-90"
                             >
-                                Aceitar todos os cookies
+                                {lang('cookies.acceptAll')}
                             </button>
                         </div>
                     </div>

@@ -1,3 +1,4 @@
+import { useLanguage } from '../Hooks/useLanguage';
 import { useEffect, useRef } from 'react';
 
 import { gsap } from 'gsap';
@@ -8,6 +9,7 @@ import bgPattern from '../assets/img/bg-pattern.jpg';
 import { Reveal } from './Reveal';
 
 const Welcome: React.FC = () => {
+    const lang = useLanguage();
     const bgRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLHeadingElement | null>(null);
 
@@ -67,7 +69,7 @@ const Welcome: React.FC = () => {
                     ref={titleRef}
                     className="text-2xl md:text-3xl font-medium uppercase text-center mb-5 xl:mb-10 flex justify-center flex-wrap"
                 >
-                    {'Descubra o Dell Anno Global Living'.split(' ').map((word, i) => (
+                    {lang('welcome.title').split(' ').map((word, i) => (
                         <span key={i} className="inline-block mr-2 whitespace-nowrap">
                             {word.split('').map((char, j) => (
                                 <span key={j} className="inline-block">
@@ -80,10 +82,10 @@ const Welcome: React.FC = () => {
 
                 <Reveal className="md:text-xl text-center leading-relaxed max-w-5xl px-2 mx-auto" direction="bottom" delay={2}>
                     <p>
-                        Hoje em dia, não importa onde você esteja no mundo, morar com estilo, modernidade e sofisticação é um conceito único. O luxo e o prazer de viver não mudam de um lugar para outro. Compreender isto é desenvolver um design cada vez mais universal e, ao mesmo tempo, autêntico e exclusivo.
+                        {lang('welcome.description')}
                     </p>
                     <p>
-                        Bem-vindo ao Dell Anno Global Living.
+                        {lang('welcome.greeting')}
                     </p>
                 </Reveal>
             </div>

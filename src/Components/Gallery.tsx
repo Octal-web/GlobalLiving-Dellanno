@@ -1,3 +1,4 @@
+import { useLanguage } from '../Hooks/useLanguage';
 import { useEffect, useRef } from 'react';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/style.css';
@@ -11,6 +12,7 @@ import eyeIcon from '../assets/img/eye-icon.png';
 import { ImageGallery } from "../Types/ImageGallery";
 
 import { Reveal } from './Reveal';
+import { basename } from '../Utils/basename';
 
 type GalleryProps = {
     images: ImageGallery[];
@@ -18,6 +20,7 @@ type GalleryProps = {
 };
 
 const Gallery: React.FC<GalleryProps> = ({ images, withBackground }) => {
+    const lang = useLanguage();
     const bgRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {  
@@ -49,6 +52,12 @@ const Gallery: React.FC<GalleryProps> = ({ images, withBackground }) => {
         const lightbox = new PhotoSwipeLightbox({
             gallery: galleryRef.current,
             children: 'a',
+            closeTitle: lang('gallery.close'),
+            zoomTitle: lang('gallery.zoom'),
+            arrowPrevTitle: lang('gallery.previous'),
+            arrowNextTitle: lang('gallery.next'),
+            errorMsg: lang('gallery.error'),
+            indexIndicatorSep: lang('gallery.counterSeparator'),
             pswpModule: () => import('photoswipe'),
         });
 
@@ -57,7 +66,7 @@ const Gallery: React.FC<GalleryProps> = ({ images, withBackground }) => {
         return () => {
             lightbox.destroy();
         };
-    }, []);
+    }, [lang]);
 
     return (
         <section
@@ -73,7 +82,7 @@ const Gallery: React.FC<GalleryProps> = ({ images, withBackground }) => {
                         <Reveal key={index} direction="bottom">
                             <a
                                 key={index}
-                                href={`/content/gallery/${image.img}`}
+                                href={`${basename}/content/gallery/${image.img}`}
                                 data-pswp-width="1200"
                                 data-pswp-height="1050"
                                 target="_blank"
@@ -81,8 +90,8 @@ const Gallery: React.FC<GalleryProps> = ({ images, withBackground }) => {
                                 className="group relative aspect-[0.8] md:aspect-square overflow-hidden transition-all hover:shadow block"
                             >
                                 <img
-                                    src={`/content/gallery/${image.img}`}
-                                    alt={`Imagem ${index + 1}`}
+                                    src={`${basename}/content/gallery/${image.img}`}
+                                    alt={`${lang('gallery.image')} ${index + 1}`}
                                     className="w-full h-full object-cover transition-all duration-300 group-hover:scale-110"
                                 />
 

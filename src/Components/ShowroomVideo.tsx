@@ -1,3 +1,4 @@
+import { useLanguage } from '../Hooks/useLanguage';
 import React, { useRef, useEffect, useState } from "react";
 import playIcon from "../assets/img/play-btn.png";
 import pauseIcon from "../assets/img/pause-btn.png";
@@ -8,8 +9,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import bgPattern from '../assets/img/bg-pattern.jpg';
 
 import { Reveal } from './Reveal';
+import { basename } from "../Utils/basename";
 
 const ShowroomVideo: React.FC = () => {
+    const lang = useLanguage();
     const bgRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLHeadingElement | null>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -82,7 +85,7 @@ const ShowroomVideo: React.FC = () => {
                     ref={titleRef}
                     className="text-2xl md:text-3xl font-medium uppercase text-center mb-8 xl:mb-12 flex justify-center flex-wrap"
                 >
-                    {'Descubra o Dell Anno Global Living'.split(' ').map((word, i) => (
+                    {lang('welcome.title').split(' ').map((word, i) => (
                         <span key={i} className="inline-block mr-2 whitespace-nowrap">
                             {word.split('').map((char, j) => (
                                 <span key={j} className="inline-block">
@@ -97,8 +100,8 @@ const ShowroomVideo: React.FC = () => {
                     <video
                         ref={videoRef}
                         className="w-full h-auto"
-                        src="/content/videos/video-showroom.mp4"
-                        poster="/content/display/6a0c178d672f54a8ac36e3a73b6b503f.jpg"
+                        src={`${basename}/content/videos/video-showroom.mp4`}
+                        poster={`${basename}/content/display/6a0c178d672f54a8ac36e3a73b6b503f.jpg`}
                     />
 
                     <div className="absolute inset-0 bg-black opacity-0 transition-all group-hover:opacity-20" />
@@ -109,7 +112,7 @@ const ShowroomVideo: React.FC = () => {
                     >
                         <img
                             src={isPlaying ? pauseIcon : playIcon}
-                            alt={isPlaying ? "Pause" : "Play"}
+                            alt={isPlaying ? lang('video.pause') : lang('video.play')}
                             className={`${isPlaying ? 'opacity-0 group-hover:opacity-50 ' : ''}shadow rounded-full transition-all group-hover:scale-110`}
                         />
                     </button>
@@ -117,10 +120,10 @@ const ShowroomVideo: React.FC = () => {
 
                 <Reveal className="md:text-xl text-center leading-relaxed max-w-5xl px-2 mx-auto" direction="bottom">
                     <p>
-                        Hoje em dia, não importa onde você esteja no mundo, morar com estilo, modernidade e sofisticação é um conceito único. O luxo e o prazer de viver não mudam de um lugar para outro. Compreender isto é desenvolver um design cada vez mais universal e, ao mesmo tempo, autêntico e exclusivo.
+                        {lang('welcome.description')}
                     </p>
                     <p>
-                        Bem-vindo ao Dell Anno Global Living.
+                        {lang('welcome.greeting')}
                     </p>
                 </Reveal>
             </div>

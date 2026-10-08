@@ -1,11 +1,12 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
 import Lenis from 'lenis';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 
-import ApercuPro from '../assets/fonts/ApercuPro.woff2';
-import ApercuProMedium from '../assets/fonts/ApercuPro-Medium.woff2';
 import ApercuProBold from '../assets/fonts/ApercuPro-Bold.woff2';
+import ApercuProMedium from '../assets/fonts/ApercuPro-Medium.woff2';
+import ApercuPro from '../assets/fonts/ApercuPro.woff2';
 
 import { CookieModal } from '../Components/CookieModal';
+import { useLanguage } from '../Hooks/useLanguage';
 
 interface DefaultLayoutProps {
     children: ReactNode;
@@ -15,9 +16,13 @@ interface DefaultLayoutProps {
 
 export default function DefaultLayout({
     children,
-    title = 'Global Living | Dell Anno',
-    description = 'O luxo e o prazer de viver não mudam de um lugar para outro.',
+    title,
+    description,
 }: DefaultLayoutProps) {
+    const lang = useLanguage();
+    const pageTitle = title ?? lang('page.title');
+    const pageDescription = description ?? lang('page.description');
+
     const [notifyCookie, setNotifyCookie] = useState(false);
     const [trackingEnabled, setTrackingEnabled] = useState(false);
     const lenisRef = useRef<Lenis | null>(null);
@@ -139,20 +144,20 @@ export default function DefaultLayout({
 
     return (
         <>
-            <title>{title}</title>
-            <meta name="description" content={description || ''} />
+            <title>{pageTitle}</title>
+            <meta name="description" content={pageDescription} />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <meta name="author" content="Octal Web" />
 
-            <meta property="og:title" content={title} />
-            <meta property="og:description" content={description || ''} />
+            <meta property="og:title" content={pageTitle} />
+            <meta property="og:description" content={pageDescription} />
             <meta property="og:image" content="/assets/preview.jpg" />
             <meta property="og:type" content="website" />
             <meta property="og:url" content="https://global-living.meusite.com" />
 
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={title} />
-            <meta name="twitter:description" content={description || ''} />
+            <meta name="twitter:title" content={pageTitle} />
+            <meta name="twitter:description" content={pageDescription} />
             <meta name="twitter:image" content="/assets/preview.jpg" />
 
             <main className="min-h-screen font-primary overflow-hidden">

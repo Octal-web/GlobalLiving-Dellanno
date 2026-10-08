@@ -1,3 +1,4 @@
+import { useLanguage } from '../Hooks/useLanguage';
 import { Store } from "../Types/Store";
 
 import { ImageGalleryList } from "../Data/ImageGalleryList";
@@ -6,6 +7,7 @@ import { ImageHighlightList } from "../Data/ImageHighlightList";
 import Gallery from './Gallery';
 import Highlights from './Highlights';
 import { Reveal } from './Reveal';
+import { basename } from "../Utils/basename";
 
 type StoreItemProps = {
     item: Store;
@@ -13,6 +15,7 @@ type StoreItemProps = {
 };
 
 const StoreItem: React.FC<StoreItemProps> = ({ item, index }) => {
+    const lang = useLanguage();
     const storeImages = ImageGalleryList.filter(img => img.storeId === item.id);
     const storeHighlights = ImageHighlightList.filter(img => img.storeId === item.id);
 
@@ -22,7 +25,7 @@ const StoreItem: React.FC<StoreItemProps> = ({ item, index }) => {
                 <div className="flex max-md:flex-col items-center">
                     <Reveal className="md:w-2/3 max-w-[1145px]" direction="left">
                         <img
-                            src={`/content/stores/${item.img}`}
+                            src={`${basename}/content/stores/${item.img}`}
                             alt={`Dell Anno ${item.nome.replace(/<br\s*\/?>/gi, ' ')}`}
                         />
                     </Reveal>
@@ -44,9 +47,9 @@ const StoreItem: React.FC<StoreItemProps> = ({ item, index }) => {
 
             {index === 0 && (
                 <div className="container max-w-large">
-                    <Reveal className="sm:text-xl text-center !leading-relaxed max-w-5xl px-12 md:px-20 2xl:px-28 mx-auto mt-10 mb-20 md:mb-40" direction="bottom" delay={2}>
+                    <Reveal className="sm:text-xl text-center !leading-relaxed max-w-5xl px-12 md:px-20 2xl:px-28 mx-auto mt-10 mb-20 md:mb-40 whitespace-pre-line" direction="bottom" delay={2}>
                         <p>
-                            E, como toda grande marca global, tudo o que você encontra em termos de qualidade, design e produto na loja de Nova York também está presente na flagship brasileira, em São Paulo, e em todas as lojas da marca no Brasil.
+                            {lang('stores.quality')}
                         </p>
                     </Reveal>
                 </div>
